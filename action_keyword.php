@@ -2,6 +2,8 @@
 
 $keyword = $_POST['keyword'];
 
+//$keyword = "ハッカソン";
+
 $suggest_data = array(
   'qu' => $keyword .'+',
   'hl' => 'ja',
@@ -36,10 +38,29 @@ for($i=1;$i<=10;$i++)
 	$suggest_keyword[$i]=str_replace($keyword, "", $suggest_keywords[$i]);
 }
 
-$rand_keys = array_rand($suggest_keyword,3);
+$rand_keys = array_rand($suggest_keyword,10);
 
 $send_keywords['relation_keyword'] = array("");
-$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[0]];
+$send_number = 0;
+
+
+for($i=0;$i<10;$i++)
+{
+	if(mb_strlen($suggest_keyword[$rand_keys[$i]]) <= 15)
+	{
+		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[0]];
+		$send_number++;
+		if($send_number == 1)
+		{
+			break;
+		}
+	}
+	else
+	{
+		continue;
+	}
+}
+
 $send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[1]];
 
 $limit_number=3;
@@ -67,7 +88,14 @@ $graph_keywords = array("楽しい");
 
 if($graph_result_data['itemListElement'] == null)
 {
-	$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[2]];
+	if(mb_strlen($suggest_keyword[$rand_keys[9]]) <= 15)
+	{
+		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[9]];
+	}
+	else
+	{
+		$send_keywords['relation_keyword'][] = "カプチーノ";
+	}
 }
 else
 {
