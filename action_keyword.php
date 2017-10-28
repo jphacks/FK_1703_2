@@ -48,9 +48,9 @@ for($i=0;$i<10;$i++)
 {
 	if(mb_strlen($suggest_keyword[$rand_keys[$i]]) <= 15)
 	{
-		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[0]];
+		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[$i]];
 		$send_number++;
-		if($send_number == 1)
+		if($send_number == 2)
 		{
 			break;
 		}
@@ -60,8 +60,6 @@ for($i=0;$i<10;$i++)
 		continue;
 	}
 }
-
-$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[1]];
 
 $limit_number=3;
 
@@ -88,9 +86,9 @@ $graph_keywords = array("楽しい");
 
 if($graph_result_data['itemListElement'] == null)
 {
-	if(mb_strlen($suggest_keyword[$rand_keys[9]]) <= 15)
+	if(mb_strlen($suggest_keyword[$rand_keys[8]]) <= 15)
 	{
-		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[9]];
+		$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[8]];
 	}
 	else
 	{
