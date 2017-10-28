@@ -80,5 +80,45 @@ for($i=1;$i<=$limit_number;$i++)
 
 $send_keywords = array($graph_key);
 
-echo $send_keywords;
+$suggest_data = array(
+  'qu' => $keyword .'+',
+  'hl' => 'ja',
+  'output' => 'toolbar',
+  'ie' => 'utf_8',
+  'oe' => 'utf_8'
+);
+
+$suggest_url = 'http://suggestqueries.google.com/complete/search' . '?' . http_build_query($suggest_data);
+
+$ch = curl_init();
+curl_setopt($ch,CURLOPT_URL, $suggest_url);
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST,'GET');
+curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+$suggest_result_xml = curl_exec($ch);
+$xml = simplexml_load_string($suggest_result_xml);
+$suggest_result_json = json_encode($xml,JSON_UNESCAPED_UNICODE);
+curl_close($ch);
+
+$suggest_result_data = json_decode($suggest_result_json,true);
+
+$suggest_keywords=array("楽しい");
+
+foreach((array)$suggest_result_data['CompleteSuggestion'] as $suggest_data) {
+  //echo $suggest_data['suggestion']['@attributes']['data'] . '<br/>';
+	$suggest_keywords[] = $suggest_data['suggestion']['@attributes']['data'];
+}
+
+for($i=1;$i<=10;$i++)
+{
+	$suggest_keyword[$i]=str_replace($keyword, "", $suggest_keywords[$i]);
+}
+
+$rand_keys = array_rand($suggest_keyword, 2);
+$send_keywords[] = $suggest_keyword[$rand_keys[0]];
+$send_keywords[] = $suggest_keyword[$rand_keys[1]];
+$send_keywords_json = json_encode($send_keywords,JSON_UNESCAPED_UNICODE);
+
+echo $send_keywords_json;
+
 ?>
