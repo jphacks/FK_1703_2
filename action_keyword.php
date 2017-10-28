@@ -2,7 +2,7 @@
 
 $keyword = $_POST['keyword'];
 
-//$keyword = "ハッカソン";
+//$keyword = "サッカー";
 
 $suggest_data = array(
   'qu' => $keyword .'+',
@@ -35,7 +35,7 @@ foreach((array)$suggest_result_data['CompleteSuggestion'] as $suggest_data)
 
 for($i=1;$i<=10;$i++)
 {
-	$suggest_keyword[$i]=str_replace($keyword, "", $suggest_keywords[$i]);
+	$suggest_keyword[$i]=trim(str_replace($keyword, "", $suggest_keywords[$i]));
 }
 
 $rand_keys = array_rand($suggest_keyword,10);
