@@ -78,7 +78,9 @@ for($i=1;$i<=$limit_number;$i++)
 	$graph_key= "カプチーノ";
 }
 
-$send_keywords = array($graph_key);
+$send_keywords['relation_keyword'] = array("");
+
+$send_keywords['relation_keyword'][] = $graph_key;
 
 $suggest_data = array(
   'qu' => $keyword .'+',
@@ -115,8 +117,11 @@ for($i=1;$i<=10;$i++)
 }
 
 $rand_keys = array_rand($suggest_keyword, 2);
-$send_keywords[] = $suggest_keyword[$rand_keys[0]];
-$send_keywords[] = $suggest_keyword[$rand_keys[1]];
+$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[0]];
+$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[1]];
+
+$relation_keyword_split = array_splice($send_keywords['relation_keyword'],0,1);
+
 $send_keywords_json = json_encode($send_keywords,JSON_UNESCAPED_UNICODE);
 
 echo $send_keywords_json;
