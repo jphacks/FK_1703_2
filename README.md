@@ -1,6 +1,6 @@
 # Grandea ～広げるアイデア～
 
-# Grandeaのサーバ側のプログラムです。
+### Grandeaのサーバ側のプログラムです。
 
 ### Mobile App : https://github.com/jphacks/FK_1703  
   
