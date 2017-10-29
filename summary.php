@@ -1,6 +1,6 @@
 <?php
 
-$text = "";
+$text = $_POST['sentence'];
 
 $keyword_number = 3;
 $summary_number = 3;

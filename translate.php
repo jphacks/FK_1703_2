@@ -1,6 +1,6 @@
 <?php
 
-$text = "";
+$text = S_POST['sentence'];
 
 $target = "en";
 
