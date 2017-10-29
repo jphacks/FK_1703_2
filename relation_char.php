@@ -4,7 +4,7 @@ $keyword_number = 1;	//取得するキーワード数
 
 $title = "";	//タイトル
 
-$body= "";	//本文
+$body= $_POST['sentence'];	//本文
 
 $keyword_data = array(	
 	'app_id' => 'c33b6b99123f6b322e73a3f8c8047ac46410c010100a533f2afdda752bd5800f',
