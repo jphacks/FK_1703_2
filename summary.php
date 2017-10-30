@@ -26,9 +26,32 @@ $minutes_result_data = json_decode($minutes_result_json,true);
 $send_summary['summary'] = array("");
 $send_summary['keywords'] = array("");
 
-foreach((array)$minutes_result_data['summary'] as $value)
+if(isset($minutes_result_data['summary']))
 {
-	$send_summary['summary'][] = $value;
+	foreach((array)$minutes_result_data['summary'] as $value)
+	{
+		$send_summary['summary'][] = $value;
+	}
+}
+else
+{
+	for($i=0;$i<3;$i++)
+	{
+		$send_summary['summary'][] = "null";
+	}
+}
+
+if( count($send_summary['summary']) == 2 )
+{
+	for($i=0;$i<2;$i++)
+	{
+		$send_summary['summary'][] = "null";
+	}
+}
+else if( count($send_summary['summary']) == 3 )
+{
+	$send_summary['summary'][] = "null";
+
 }
 
 for($i=0;$i<$keyword_number;$i++)
@@ -42,8 +65,7 @@ for($i=0;$i<$keyword_number;$i++)
 	}
 	else
 	{
-		$send_summary['keywords'][] = "キーワードが見つかりませんでした。";
-		break;
+		$send_summary['keywords'][] = "null";
 	}
 }
 

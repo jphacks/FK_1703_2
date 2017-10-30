@@ -38,10 +38,21 @@ for($i=0;$i<$keyword_number;$i++)
 	}
 	else
 	{
-		$keyword = "カプチーノ";
+		$keyword = "";
 	}
 }
 
+$send_keywords['relation_keyword'] = array("");
+
+if($keyword=="")
+{
+	for($i=0;$i<3;$i++)
+	{
+		$send_keywords['relation_keyword'][] = "";
+	}
+}
+else
+{
 $suggest_data = array(
   'qu' => $keyword .'+',
   'hl' => 'ja',
@@ -78,7 +89,6 @@ for($i=1;$i<=10;$i++)
 
 $rand_keys = array_rand($suggest_keyword,9);
 
-$send_keywords['relation_keyword'] = array("");
 $send_number = 0;
 
 
@@ -98,8 +108,6 @@ for($i=0;$i<9;$i++)
 		continue;
 	}
 }
-
-//$send_keywords['relation_keyword'][] = $suggest_keyword[$rand_keys[1]];
 
 $limit_number=3;
 
@@ -132,7 +140,7 @@ if($graph_result_data['itemListElement'] == null)
 	}
 	else
 	{
-		$send_keywords['relation_keyword'][] = "カプチーノ";
+		$send_keywords['relation_keyword'][] = "";
 	}
 }
 else
@@ -149,13 +157,14 @@ else
 			$graph_key = $graph_keywords[$i];
 			break;
 		}
-		$graph_key= "カプチーノ";
+		$graph_key= "";
 	}
 	$send_keywords['relation_keyword'][] = $graph_key;
 }
 
 $relation_keyword_split = array_splice($send_keywords['relation_keyword'],0,1);
 
+}
 $send_keywords_json = json_encode($send_keywords,JSON_UNESCAPED_UNICODE);
 
 echo $send_keywords_json;

@@ -2,8 +2,6 @@
 
 $keyword = $_POST['keyword'];
 
-//$keyword = "サッカー";
-
 $suggest_data = array(
   'qu' => $keyword .'+',
   'hl' => 'ja',
